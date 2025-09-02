@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "harmoniyabridge",
+  "version": "${version}",
+  "name": "HarmoniyaBridge",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/harmoniyabridge/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.ua.ikeepcalm.harmoniyabridge.client.HarmoniyaClient"
+    ],
+    "main": [
+      "dev.ua.ikeepcalm.harmoniyabridge.HarmoniyaBridge"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
