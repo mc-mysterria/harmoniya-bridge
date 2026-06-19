@@ -17,9 +17,13 @@
       "dev.ua.ikeepcalm.harmoniyabridge.HarmoniyaBridge"
     ]
   },
+  "mixins": [
+    "harmoniyabridge.mixins.json"
+  ],
   "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric": "*",
-    "minecraft": "${minecraft_version}"
+    "fabricloader": ">=0.18.6",
+    "minecraft": "~26.1.2",
+    "java": ">=25",
+    "fabric-api": "*"
   }
 }

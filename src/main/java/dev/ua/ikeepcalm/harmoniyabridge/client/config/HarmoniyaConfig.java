@@ -21,6 +21,7 @@ public class HarmoniyaConfig {
     public boolean enableRetryMechanism = true;
     public int maxRetryAttempts = 3;
     public int retryDelayMs = 5000;
+    public boolean bypassWarningPopup = false;
     
     public static HarmoniyaConfig getInstance() {
         if (instance == null) {

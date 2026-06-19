@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "dev.ua.ikeepcalm.harmoniyabridge.client.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "refmap": "harmoniyabridge-refmap.json",
+  "client": [
+    "JoinMultiplayerScreenMixin",
+    "OnlineServerEntryMixin",
+    "EntryInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

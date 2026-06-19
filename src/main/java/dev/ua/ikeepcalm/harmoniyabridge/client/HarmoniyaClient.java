@@ -21,7 +21,9 @@ import java.util.concurrent.TimeUnit;
 public class HarmoniyaClient implements ClientModInitializer {
 
     private static final String MOD_ID = "harmoniyabridge";
+
     public static final Identifier HANDSHAKE = Identifier.fromNamespaceAndPath(MOD_ID, "handshake");
+
     private static final Logger LOGGER = LoggerFactory.getLogger("HarmoniyaBridge");
 
     private static HarmoniyaConfig config;
@@ -55,26 +57,22 @@ public class HarmoniyaClient implements ClientModInitializer {
             }
 
             User user = client.getUser();
-            if (user == null) {
-                LOGGER.error("Session/User is null, cannot perform handshake");
-                return;
-            }
 
             String accessToken = user.getAccessToken();
-            if (accessToken == null || accessToken.trim().isEmpty()) {
+            if (accessToken.trim().isEmpty()) {
                 LOGGER.error("Access token is null or empty, cannot perform handshake");
                 return;
             }
 
             LOGGER.info("Access token validated, sending handshake...");
-            sendHandshakeWithRetry(accessToken, client, 1);
+            sendHandshakeWithRetry(accessToken, 1);
 
         } catch (Exception e) {
             LOGGER.error("Unexpected error during server join handling", e);
         }
     }
 
-    private void sendHandshakeWithRetry(String accessToken, Minecraft client, int attempt) {
+    private void sendHandshakeWithRetry(String accessToken, int attempt) {
         try {
             HandshakePayload payload = new HandshakePayload(accessToken);
 
@@ -90,7 +88,7 @@ public class HarmoniyaClient implements ClientModInitializer {
 
                 LOGGER.info("Scheduling retry attempt {} in {}ms", nextAttempt, delay);
                 scheduler.schedule(
-                        () -> sendHandshakeWithRetry(accessToken, client, nextAttempt),
+                        () -> sendHandshakeWithRetry(accessToken, nextAttempt),
                         delay,
                         TimeUnit.MILLISECONDS
                 );
