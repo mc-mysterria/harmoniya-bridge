@@ -1,23 +1,20 @@
 package dev.ua.ikeepcalm.harmoniyabridge.client.packets;
 
 import dev.ua.ikeepcalm.harmoniyabridge.client.HarmoniyaClient;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.network.packet.CustomPayload;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-import java.util.ArrayList;
-import java.util.List;
+public record HandshakePayload(String handshake) implements CustomPacketPayload {
 
-public record HandshakePayload(String handshake) implements CustomPayload {
+    public static final CustomPacketPayload.Type<HandshakePayload> ID = new CustomPacketPayload.Type<>(HarmoniyaClient.HANDSHAKE);
 
-    public static final CustomPayload.Id<HandshakePayload> ID = new CustomPayload.Id<>(HarmoniyaClient.HANDSHAKE);
-
-    public static final PacketCodec<RegistryByteBuf, HandshakePayload> CODEC =
-            PacketCodec.tuple(PacketCodecs.STRING, HandshakePayload::handshake, HandshakePayload::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, HandshakePayload> CODEC =
+            StreamCodec.composite(ByteBufCodecs.stringUtf8(32767), HandshakePayload::handshake, HandshakePayload::new);
 
     @Override
-    public CustomPayload.Id<? extends CustomPayload> getId() {
+    public Type<? extends CustomPacketPayload> type() {
         return ID;
     }
 }

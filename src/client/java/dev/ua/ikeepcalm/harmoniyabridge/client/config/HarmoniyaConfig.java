@@ -18,9 +18,6 @@ public class HarmoniyaConfig {
     
     private static HarmoniyaConfig instance;
     
-    public boolean enableModDetection = true;
-    public boolean enableDiscordWebhook = true;
-    public String discordWebhookUrl = "https://discord.com/api/webhooks/1412324308713340938/WnaESVOsEufsOnqf90E-btKxtE8v0hc0knE3NoDOxxnIghsv947kwJpQJl5llyk7X4Xt";
     public boolean enableRetryMechanism = true;
     public int maxRetryAttempts = 3;
     public int retryDelayMs = 5000;
