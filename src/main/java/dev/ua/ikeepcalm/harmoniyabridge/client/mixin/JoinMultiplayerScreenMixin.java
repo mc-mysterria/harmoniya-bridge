@@ -43,7 +43,7 @@ public class JoinMultiplayerScreenMixin {
         if (!bypassPopup && !HarmoniyaConfig.getInstance().bypassWarningPopup && (serverData.ip.equalsIgnoreCase("mc.mysterria.net") || serverData.ip.equalsIgnoreCase("play.mysterria.net"))) {
             ci.cancel();
 
-            Minecraft.getInstance().setScreen(new WarningScreen(
+            Minecraft.getInstance().gui.setScreen(new WarningScreen(
                     confirmed -> {
                         if (confirmed) {
                             bypassPopup = true;
@@ -51,7 +51,7 @@ public class JoinMultiplayerScreenMixin {
                             screen.join(serverData);
                             bypassPopup = false;
                         } else {
-                            Minecraft.getInstance().setScreen((JoinMultiplayerScreen) (Object) this);
+                            Minecraft.getInstance().gui.setScreen((JoinMultiplayerScreen) (Object) this);
                         }
                     }
             ));
